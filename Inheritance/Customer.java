@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package s4j.java.chapter12;
+12;
 
 @SuppressWarnings("all")
 public class Customer implements Comparable<Customer> {

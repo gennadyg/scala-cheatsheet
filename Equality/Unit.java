@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package s4j.java.chapter04;
+04;
 
 import java.util.concurrent.Callable;
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package s4j.java.chapter12;
+12;
 
 public class CustomersUsageExample {
 	public static void main(String... args) {

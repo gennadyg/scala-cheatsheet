@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package s4j.java.chapter14;
+14;
 
 public interface Stack<T> {
     void push(T t);

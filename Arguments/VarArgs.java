@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package s4j.java.chapter06;
+06;
 
 public class VarArgs {
 

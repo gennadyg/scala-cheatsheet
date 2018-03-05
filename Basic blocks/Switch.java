@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package s4j.java.chapter13;
+13;
 
 public class Switch {
     public static void main(String... args) {

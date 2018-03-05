@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package s4j.java.chapter10;
+10;
 
 import java.util.logging.Level;
 

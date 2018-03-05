@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package s4j.java.chapter11;
+11;
 
 import java.util.Arrays;
 import java.util.Comparator;

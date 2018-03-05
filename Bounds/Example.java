@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package s4j.java.chapter14;
+14;
 
 import s4j.java.chapter12.Customer;
 import s4j.java.chapter12.DiscountedCustomer;

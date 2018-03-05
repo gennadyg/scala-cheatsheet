@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package s4j.java.chapter12;
+12;
 
 import java.util.HashSet;
 import java.util.Set;
