@@ -161,3 +161,70 @@ val add10 = million.par.view map {_ + 10}
 val mulBy2 = add10 map {_*2}
 println (mulBy2 sum)}
 ```
+## Pattern matching
+```scala
+def foo(c : Char) = c match {
+case 'h' => "hello"
+case 'x' | 'q' => "exit"
+case _ => null }	
+// match statement can also match the type of the object
+def foo2(x : Any) = println(x match {
+case t : Boolean => "It is Boolean"
+case t : String => "It is String"
+})
+// You can refer to method parameters using backquotes
+def foo5(a :Int, b : Int) = a match {
+// will match a == b
+case `b` => true
+case _ => false }
+// You can also include conditions in match/case.
+def isOdd(i : Int)= i % 2 == 1
+def foo8(i: Int) = i match {
+case x : Int if (isOdd(x)) => "odd"
+case _=> "even"}
+```
+## Exception Handling
+```scala
+def example(idx : Int)= {
+try {  
+  exceptionThrower(idx)
+} catch {
+case e :IllegalArgumentException => println("IAE: " + e.getMessage)
+case e :NullPointerException => println("NPE: " + e.getMessage)
+case e => println("Something Else: " + e.getMessage)}}
+```
+## Case classes
+- The equals method is implemented according to the primary constructor parameters.
+- hashCode is implemented according to primary constructor parameters.
+- toString is implemented and prints the name of the class and its primary constructor values.
+- Companion object with a factory apply method
+```scala
+case class Person(name : String, age : Int)
+val john = Person("john", 30)
+val jane = Person("jane", 25)
+// prints false
+println(john == jane)
+// prints true
+println(john == Person("john", 30))
+// prints Person( john,30 )
+println( john )
+```
+## Regular Expressions
+// Regular expressions are created using the method **r()** on a String.
+```scala
+object Foo extends Application{
+val pattern = """\d+[a-z]+""".r
+// prints Some(444ccc)
+println(pattern findFirstIn "a444ccc3")}
+// Regular expressions in Scala can be used as extractors in pattern matching
+sealed class PhoneType
+object LinePhone extends PhoneType
+object Cellular extends PhoneType
+val linePattern = """(\d{2}-\d{7})""".r
+val cellPattern = """(\d{3}-\d{7})""".r
+def whichTypeOfPhone(phoneNum: String) = phoneNum match {
+case linePattern(phone) => LinePhone
+case cellPattern(phone) => Cellular
+case _ => error("Invalid phone number")
+}
+```
