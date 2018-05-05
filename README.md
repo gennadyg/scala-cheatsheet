@@ -65,8 +65,17 @@ import java.util._
 - With one exception: it can be extended only in the same file.
 - The sub classes can be extended ( unless they are seal or final ).
 
-
-
+## Parameterized Types
+``` scala
+class PrefixPrint[A] (prefix : String, a : A) {
+def print = { println(prefix + a) }
+}
+// prints >>>Hello
+new PrefixPrint(">>>", "Hello").print
+// prints >>>5
+You can force the compiler to use a specific type b specifying it in the new declaration.
+new PrefixPrint[String](">>>", “” + 5) print
+```
 
 - Call by value: evaluates the function arguments before calling the function
 - Call by name: evaluates the function first, and then evaluates the arguments if need be
