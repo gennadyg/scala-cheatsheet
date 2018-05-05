@@ -16,7 +16,7 @@ class Person (val name : String, var age : Int) {
 	var stage : Int = _ 
         // not specifying a value makes the field abstract.
 	//In Scala in order to override a method you must use the override keyword
-	**override** def toString = "Game at stage " + stage
+	override def toString = "Game at stage " + stage
 	//Varargs in Scala are declared with the ‘*’ sign.
 	def sumAll(numbers : Int*)
 }
