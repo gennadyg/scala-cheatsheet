@@ -12,8 +12,17 @@ class Person (val name : String, var age : Int) {
 	def this(name: String, birthDay : Date) {
 		this(name, new Date().getYear - birthDay.getYear)
 	}
+	// assigning the default value for the type 
+	var stage : Int = _ 
+        // not specifying a value makes the field abstract.
+	//In Scala in order to override a method you must use the override keyword
+	**override** def toString = "Game at stage " + stage
+	//Varargs in Scala are declared with the ‘*’ sign.
+	def sumAll(numbers : Int*)
 }
 ```
+ 
+
 ## Class Any provides the following methods:
 - == && != : methods do not perform reference equality 
 - asInstanceOf
@@ -24,7 +33,6 @@ class Person (val name : String, var age : Int) {
 
 So, why not use the equals method ? Because ‘==‘ and ‘!=‘ are null safe!
 
-
 ### Casting:
 asInstanceOf[Long]
 
@@ -34,27 +42,16 @@ asInstanceOf[Long]
  - finalize, notify, notifyAll, wait, getClass.
  - synchronized
 
-// assigning the default value for the type 
-var stage : Int = _ 
-
-not specifying a value makes the field abstract. 
- 
-About:
-- Everything is object
-- No static methods
+## Imports
 
 import java.util.{ Calendar => JavaCal }
 import java.util._
 
 
+
 Unit: alternative to void
 
-Primary constructor
 
-
-Any provides methods:
-
-== like equals javax
 
 Apply - avoid to make new 
 
