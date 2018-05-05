@@ -19,9 +19,19 @@ class Person (val name : String, var age : Int) {
 	override def toString = "Game at stage " + stage
 	//Varargs in Scala are declared with the ‘*’ sign.
 	def sumAll(numbers : Int*)
+	// only visible to current instance
+	private[this] val secret = "password"
+	// only visible in package util
+	private[util] val shared = "s1"
 }
 ```
- 
+## Visibility Rules
+- By default, everything in Scala is public.
+- You can define a member/method/constructor/class as protected/private.
+- A protected member is visible only to the inheriting types.
+- A protected class is visible to the current package and its sub-packages.
+- A private class is visible only to the current package.
+- A private member is visible only to the current class andits nested classes
 
 ## Class Any provides the following methods:
 - == && != : methods do not perform reference equality 
@@ -49,14 +59,11 @@ import java.util._
 
 
 
-Unit: alternative to void
-
-
-
-Apply - avoid to make new 
-
-Sealed class:
-
+## Sealed class:
+- A sealed class can’t be extended.
+- Just like final.
+- With one exception: it can be extended only in the same file.
+- The sub classes can be extended ( unless they are seal or final ).
 
 
 
