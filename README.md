@@ -14,26 +14,23 @@ class Person (val name : String, var age : Int) {
 	}
 }
 ```
+## Class Any provides the following methods:
+- == && != : methods do not perform reference equality 
+- asInstanceOf
+- equals
+- hashCode
+- isInstanceOf
+- toString
+
+So, why not use the equals method ? Because ‘==‘ and ‘!=‘ are null safe!
 
 
-Class Any provides the following methods:
-• ==
-• !=
-• asInstanceOf
-• equals
-• hashCode
-• isInstanceOf
-• toString
-
-Because ‘==‘ and ‘!=‘ are null safe!
-
-Casting:
-
+### Casting:
 asInstanceOf[Long]
 
-AnyRef ( equivalent of Java object )
+## AnyRef ( equivalent of Java object )
  - clone.
- - eq, ne.
+ - eq, ne: for reference equality
  - finalize, notify, notifyAll, wait, getClass.
  - synchronized
 
