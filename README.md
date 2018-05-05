@@ -137,12 +137,16 @@ println(max)
 ```
 ### Transformations
 benchmark { // takes **4.3** seconds
+```scala
 val million = 1 to 10000000
 val add10 = million map {_ + 10}
 val mulBy2 = add10 map {_*2}
 println (mulBy2 sum)}
+```
 // use the **view** method of Traversable to gain a lazy view on the collection
-// **A view** records the operations (e.g.: map, flatMap, filter) and invokes them together (creates a new collection) only when required (or by invocation of force).
+// **A view** records the operations (e.g.: map, flatMap, filter) and invokes them together (creates a new collection) only when 
+```scala
+required (or by invocation of force).
 benchmark { // takes **420** milli-seconds
 val million = 1 to 10000000
 val add10 = million.**view** map {_ + 10}
@@ -154,3 +158,4 @@ val million = 1 to 10000000
 val add10 = million.**par**.view map {_ + 10}
 val mulBy2 = add10 map {_*2}
 println (mulBy2 sum)}
+```
