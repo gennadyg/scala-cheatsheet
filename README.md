@@ -152,10 +152,12 @@ val million = 1 to 10000000
 val add10 = million.**view** map {_ + 10}
 val mulBy2 = add10 map {_*2}
 println (mulBy2 sum)}
+```
 // **Parallel collections**
 benchmark { // takes **275** milli-seconds
+```scala
 val million = 1 to 10000000
-val add10 = million.**par**.view map {_ + 10}
+val add10 = million.par.view map {_ + 10}
 val mulBy2 = add10 map {_*2}
 println (mulBy2 sum)}
 ```
