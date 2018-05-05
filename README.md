@@ -77,125 +77,80 @@ You can force the compiler to use a specific type b specifying it in the new dec
 new PrefixPrint[String](">>>", “” + 5) print
 ```
 
-- Call by value: evaluates the function arguments before calling the function
-- Call by name: evaluates the function first, and then evaluates the arguments if need be
+## Bounded types
 
-vow - final static
-val language: String = "Scala" //  val is constant 
-var language: String = "Scala" // var is variable
+- Using the ‘<:’ for upper bound.
+- Using the ‘>:’ for lower bound.
 
-def example = 2      // evaluated when called
-val example = 2      // evaluated immediately
-lazy val example = 2 // evaluated once when needed
-
-def square(x: Double)    // call by value
-def square(x: => Double) // call by name
-def myFct(bindings: Int*) = { ... } // bindings is a sequence of int, containing a varying # of arguments
-----------------------------------------------------------
-Classes:
-
-class Customer( val name: String, val address: String ){
-  private var id = "" 
+```scala
+class PrefixPrint[A <: AnyRef] (prefix : String, a : A) {
+  def print = { println( prefix + a ) }
 }
+// prints >>>Hello
+new PrefixPrint(">>>", "Hello").print
+// does not compile
+new PrefixPrint(">>>", 5) print
+```
 
-Object Customer{
-	def main( args: Array[String]){
-		val eric = new Customer("name1", "name2")
-		eric.id = "00001"
-	}
-}
+## Higher order functions
 
+```scala
+def addOne(num : Int) = num + 1
+def doSomethingWithNum(num : Int, f: Int => Int) = {   f(num) }
+val x = new Foo
+// prints 6
+println( x.doSomethingWithNum( 5, x.addOne ) )
+---------------------
+// You can pass an anonymous functions (lambda) as a parameter.
+// prints 25
+println(x.doSomethingWithNum(5, (num)=>{num*num}) )
+// Variables can also have function objects.
+val square = (num : Int) => {num*num}
+// prints 25
+println(x.doSomethingWithNum(5, square) )
+// prints 11
+println(x.doSomethingWithNum(5, {6 + _}) )
+```
+## Collections
 
+```scala
+// collect(func) – applies a partial function to every element in the domain of the function (not discussed in this course).
+val coll : Traversable[Int] = List(1,2,3,4)
+// will contain 3,6,9,12
+val newColl = coll map {_*3}
+// will contain 1,2,3,4,1,2,3,4
+val newColl2 = coll ++ coll
+// will contain 1,1,2,1,2,3,1,2,3,4
+val newColl3 = coll flatMap {x => Range(1,x+1)}
 
-
-
----------------------------------------------------------
-def loop: Int = loop
-
-- if CBV evaluation of an expression terminates, then CBN evaluation terminates too
-- The other direction is not true
-
-
-// Function definition 
-
-
-
-def first( x: Int, y:Int ) = x
-
-CBN					CBV
-
-first( 1, loop)		first( 1, loop )
-
-    1				not ended
-	
-	def constOne(x: Int, y: => Int) = 1
-	
-	
-	constOne( 1+2, loop) 
-	constOne( 3, loop)
-Answer: 3
-
-	constOne( loop, 1+2)
-	never ends
-	
-	
-	
-	def abs(x: Int) = if( x>= 0) x else -x
-	
-	---------------------------------------
-	
-	Value definitions
-	
-	val y = square(x)
-	
-	
-	Example:
-	def loop: Boolean = loop
-
-	def x = loop  // ok, we've defined another name for loop
-	
-	val x = loop // never ends
-	
-	
-	def and( x: Boolean, y: => Boolean ) = if(x) y else false
-	def or( x: Boolean, y: => Boolean ) = if(x) true else y
-	
-	
-	def sqrtIter( guess: Doublem x:Double ): Double =
-		if(isGoodEnough(guess, x)) guess	
-		else sqrtIter( improve(guess, x), x )
-	
-	-----------------------
-	
-	Bloks and lexical scope
-	
-  @tailrec
-  def gcd( a: Int, b: Int ): Int =
-    if( b == 0 ) a else gcd( b, a%b )
-  
-
-  gcd( 14, 21)
-  
-  def factorial(n: Int): Int =
-    if (n == 0) 1 else n * factorial(n - 1)
-	
-  def factorialTail1(n: Int ): Int = {
-    def loop( acc: Int, n: Int ): Int =
-      if (n == 0) acc
-      else loop( acc * n, n - 1)
-    loop(1, n)
-  }
-
- def newSum( f: Int => Int ): ( Int, Int ) => Int = {
-
-    def sumF( a: Int, b: Int ): Int =
-      if( a > b ) 0
-      else f(a) + sumF( a + 1, b)
-
-    sumF
-
-  }
-  def sumInts = newSum( x => x )
-
-  sumInts( 3, 5 )  
-	
+val coll = Traversable(1,2,3,4,5)
+val currentSum = 100
+// foldLeft example: sums all the elements starting with
+// currentSum
+val newSum = coll.foldLeft(currentSum){_+_}
+// prints 115
+println(newSum)
+// reduceLeft example: find the maximum
+val max = coll reduceLeft {(a,b) => if (a > b) a else b}
+// prints 5
+println(max)
+```
+### Transformations
+benchmark { // takes **4.3** seconds
+val million = 1 to 10000000
+val add10 = million map {_ + 10}
+val mulBy2 = add10 map {_*2}
+println (mulBy2 sum)}
+// use the **view** method of Traversable to gain a lazy view on the collection
+// **A view** records the operations (e.g.: map, flatMap, filter) and invokes them together (creates a new collection) only when required (or by invocation of force).
+benchmark { // takes **420** milli-seconds
+val million = 1 to 10000000
+val add10 = million.**view** map {_ + 10}
+val mulBy2 = add10 map {_*2}
+println (mulBy2 sum)}
+// **Parallel collections**
+benchmark { // takes **275** milli-seconds
+val million = 1 to 10000000
+val add10 = million.**par**.view map {_ + 10}
+val mulBy2 = add10 map {_*2}
+println (mulBy2 sum)}
