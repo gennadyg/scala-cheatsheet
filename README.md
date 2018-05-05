@@ -1,19 +1,19 @@
-#Scala Notes 
+# Scala Notes 
 
 ## Quotes
-Spans across multiple lines and don’t support escape
-sequences (using triple double-quotes).
-
+Spans across multiple lines and don’t support escape sequences (using triple double-quotes).
+``` scala
 val myFile =
 """C:\Users\Shimi\Literals.scala"""
-
-Auxiliary Constructors:
-
+```
+## Auxiliary Constructors:
+``` scala
 class Person (val name : String, var age : Int) {
 	def this(name: String, birthDay : Date) {
 		this(name, new Date().getYear - birthDay.getYear)
 	}
 }
+```
 
 
 Class Any provides the following methods:
