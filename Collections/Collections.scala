@@ -1,19 +1,3 @@
-/*
- * Copyright (c) 2015-2017 Gennady Gilin
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package s4j.scala.chapter03
 
 object Collections extends App {
@@ -61,6 +45,76 @@ object Collections extends App {
   }
 
   (0 to 100).foreach(println(_))
+  
+    val list: List[Int] = List( 1, 2, 0, 3, 4 )
+  val result = new ListSplit().splitBySeparator( list, 0 )
+  println( result )
+
+  var goats = List(2, 4)
+
+  def cube[Int]( list: Seq[Int] ) = {
+
+    for ( x <- goats ) yield Math.pow( x, 3 )
+  }
+
+  println( cube( list ) )
+  var names = List("tuco", "jesse", "hank", "gustavo")
+
+  var acc = 0
+  names.foreach( current => (
+      if( current.length > acc ){
+        acc = current.length
+      })
+  )
+  println( acc )
+
+  var letters = List("g", "o", "a", "t")
+
+  println {
+    letters.foldLeft("") { ( memo: String, num: String ) =>
+      memo + num
+    }
+  }
+  var huh = List("l", "o", "o", "c")
+  println {
+    huh.foldRight("") { ( memo: String, num: String ) =>
+      memo + num
+    }
+  }
+
+  var countries = List("brazil", "argentina", "colombia")
+  println {
+    countries.reduceLeft { (s1: String, s2: String) =>
+      s"$s1,$s2"
+    }
+  }
+  var me = List("i", "am", "quiet")
+  println {
+    me.map { (word: String) =>
+      word.toUpperCase
+    }
+  }
+  var whatever = List(1, 2, 3, 4, 5, 6, 7)
+  println {
+    whatever.foldLeft( 0 ) { ( memo: Int, num: Int ) =>
+      if( num % 2 == 0 ) memo + num else memo
+    }
+  }
+
+  var rrr = List("ant", "beer", "battered", "cool", "burger")
+
+  println{
+
+    rrr.filter{ ( current : String ) =>
+
+      current.take(1) == "b"
+    }.reduceLeft{( s1: String, s2: String ) =>
+
+      s"$s1 $s2"
+    }
+
+
+  }
 
 }
 

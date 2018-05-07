@@ -1,4 +1,4 @@
-package s4j.scala.chapter02
+package test
 
 object Main extends App {
 
