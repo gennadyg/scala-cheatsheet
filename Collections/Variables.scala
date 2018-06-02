@@ -1,6 +1,4 @@
 
-package s4j.scala.chapter03
-
 object Variables {
 
   val immutable: String = "Scala"     // immutable can not be reassigned
