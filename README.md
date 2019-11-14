@@ -182,6 +182,21 @@ def isOdd(i : Int)= i % 2 == 1
 def foo8(i: Int) = i match {
 case x : Int if (isOdd(x)) => "odd"
 case _=> "even"}
+
+// Stepik regex
+
+val isRex = "(Rex){1}".r
+val sayLakeCat = "(meow|nya){1}".r
+val sayLakeRobot = ".*(0|1)+.*".r
+val kind = pet match {
+  case Pet(name@isRex(_), _) => "dog"
+  case Pet(_, says@sayLakeCat(_)) => "cat"
+  case Pet(_, says@sayLakeRobot(_)) => "robot"
+  case Pet(_, _) => "unknown"
+}
+println(kind)
+
+
 ```
 ## Exception Handling
 ```scala
