@@ -268,4 +268,42 @@ val log = new PartialFunction[Double, Double] {
     def apply(x: Double) = Math.log(x)
     def isDefinedAt(x: Double) = x > 0
 }
+
+
+// В магазине красок проводится акция: на банки краски объемом от 5 до 10 литров скидка 5%, на банки больше 10 литров - 10%.
+Одна банка представлена кейс классом Jar(name: String, value: Int, price: Double), где name - артикул, value - объем, price - цена в рублях.Напишите частичную функцию discount, которая при подстановке в метод collect списка банок, превратит его в список строк.
+
+  def discount: PartialFunction[Jar, String] = {
+    case jar if jar.value > 10  => s"${jar.name} ${jar.price * 0.1}"
+    case jar if jar.value > 4 => s"${jar.name} ${jar.price * 0.05}"
+  }
+
+  val discount1 = new PartialFunction[Jar, String] {
+    def apply(x: Jar) = {
+      if( x.value > 10 )
+        s"${x.name} ${x.value*0.9}"
+      else if( x.value >= 5 && x.value <= 10 )
+        s"${x.name} ${x.value*0.95}"
+      else
+        ""
+    }
+    def isDefinedAt(x: Jar) = {
+      x.value >= 5
+    }
+  }
+
+  List(
+    Jar("Морской синий 6л", 6, 3000.0),
+    Jar("Огненно-красный 12л", 12, 5000.0),
+    Jar("Зеленый 1л", 1, 500.0)
+  )
+
+  case class Jar(name: String, value: Int, price: Double)
+  val jars = List(Jar("Морской синий 6л", 6, 3000), Jar("Огненно-красный 12л", 12, 5000))
+  val ret = jars.collect(discount)
+
+  println(ret)
+}
+
 ```
+
