@@ -196,6 +196,20 @@ val kind = pet match {
 }
 println(kind)
 
+// input could be commit: ( "oleg oleg@gmail.com", "swsw", "swsw" )
+// ( "oleg",  "oleg@gmail.com", "swsw", "swsw" )
+
+  val regName = "([a-zA-Z]+)[\\s]?+".r
+  val regMail = "[\\s]?+(\\w+@)(\\w+\\.\\w+)[\\s]?+".r
+  val regNameMail = "([a-zA-Z]+)[\\s]+(\\w+@)(\\w+\\.\\w+)[\\s]?+".r
+
+  val result1 = input2 match {
+    // Напишите нужные case
+    case regName(name) :: regMail(_, domain) :: _ => s"$name $domain"
+    case regNameMail(name, _, domain) :: _ => s"$name $domain"
+    case _ => "invalid"
+  }
+  println(result1)
 
 ```
 ## Exception Handling
