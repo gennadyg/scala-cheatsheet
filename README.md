@@ -257,3 +257,15 @@ case cellPattern(phone) => Cellular
 case _ => error("Invalid phone number")
 }
 ```
+
+## Partial functions
+// Натуральный логарифм определен только на положительных числах. Функция Math.log возвращает значение натурального логарифма для всех //чисел больше 0 и NaN. Напишите частичную функцию log, считающую логарифм с помощью Math.log и определенную только для положительных // // чисел.
+```scala
+val log: PartialFunction[Double, Double] = {
+  case x if x > 0  || x == Double.NaN => Math.log(x)
+}
+val log = new PartialFunction[Double, Double] {
+    def apply(x: Double) = Math.log(x)
+    def isDefinedAt(x: Double) = x > 0
+}
+```
