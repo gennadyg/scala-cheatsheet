@@ -1,5 +1,13 @@
 # Scala Notes 
 
+## Optional 
+Метод List.find(p: Char => Boolean): Option[Char] пытается найти первый символ, удовлетворяющий предикату p. Напишите функцию foo(list: List[Int]): Int, которая находит в списке list первое число, которое делится на 3, и домножает его на 2. Если таких чисел нет, функция должна вернуть 0.
+
+``` scala
+def foo(list: List[Int]): Int = {
+    list.find(e => e % 3 == 0).map(e => e * 2).getOrElse(0)
+}
+```  
 ## Quotes
 Spans across multiple lines and don’t support escape sequences (using triple double-quotes).
 ``` scala
